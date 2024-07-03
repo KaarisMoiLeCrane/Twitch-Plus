@@ -1,7 +1,7 @@
 {
   "name": "Twitch +",
   "description": "Extension that will improve your next visits to Twitch",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "Kaaris_Moi_Le_Crane",
   "manifest_version": 3,
   "permissions": ["storage", "tabs", "notifications", "activeTab", "declarativeNetRequest"],
