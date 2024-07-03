@@ -3,6 +3,9 @@ let isVod;
 let wasStream = true;
 let saveState;
 var lastUrl = location.href;
+let genContent;
+let link;
+let resolutions = [];
 
 Node.prototype.getElementsByContentText = function (text) {
   text = text.toLowerCase();
@@ -78,6 +81,10 @@ function processLines2(inputString) {
 }
 
 async function main(shouldPause = true) {
+  genContent = undefined;
+  link = undefined;
+  resolutions = [];
+
   let loc = location.pathname.split('/');
 
   if (
@@ -108,10 +115,10 @@ async function main(shouldPause = true) {
       method: 'POST'
     }).then((resp) => resp.json());
 
-    let link = vodInfo[0].data.video.seekPreviewsURL.split('/storyboards/')[0];
+    link = vodInfo[0].data.video.seekPreviewsURL.split('/storyboards/')[0];
     let fail = true;
 
-    let resolutions = await fetch('https://gql.twitch.tv/gql', {
+    resolutions = await fetch('https://gql.twitch.tv/gql', {
       headers: {
         'client-id': 'kimne78kx3ncx6brgo4mv6wki5h1ko'
       },
@@ -170,6 +177,9 @@ async function main(shouldPause = true) {
     let elmParentHide = document.querySelector(
       'div[class *= channel][class *= root][class *= player]:not([class *= background])'
     );
+
+    if (!elmParentHide) return;
+
     for (let i = 0; i < elmParentHide.children.length; i++) {
       elmParentHide.children[i].style.display = 'none';
     }
@@ -186,6 +196,7 @@ async function main(shouldPause = true) {
         const defaultQuality = resolutions[Math.round(resolutions.length / 2) - 1]
           ? resolutions[Math.round(resolutions.length / 2) - 1]
           : 'chunked';
+
         // Create the Plyr player
         const player = new Plyr(video, {
           captions: {active: true, update: true, language: 'en'},
@@ -230,6 +241,7 @@ async function main(shouldPause = true) {
 
           // content = content.replaceAll("-unmuted.ts", ".ts")
           content = content.replaceAll('-unmuted.ts', '-muted.ts');
+          genContent = content;
           // content = processLines2(content)
           content = processLines(content, link + '/' + defaultQuality + '/');
 
@@ -253,6 +265,8 @@ async function main(shouldPause = true) {
     }
 
     hlsFunction();
+
+    download();
 
     async function loadVideo(url) {
       console.log(url);
@@ -320,6 +334,9 @@ async function main(shouldPause = true) {
     let elmParentHide = document.querySelector(
       'div[class *= channel][class *= root][class *= player]:not([class *= background])'
     );
+
+    if (!elmParentHide) return;
+
     for (let i = 0; i < elmParentHide.children.length; i++) {
       elmParentHide.children[i].style.display = null;
     }
