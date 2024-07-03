@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Kaaris_Moi_Le_Crane",
   "manifest_version": 3,
-  "permissions": ["storage", "tabs", "notifications", "activeTab", "declarativeNetRequest"],
+  "permissions": ["declarativeNetRequest"],
   "host_permissions": ["*://*.twitch.tv/*", "*://twitch.tv/*"],
 
   "icons": {
