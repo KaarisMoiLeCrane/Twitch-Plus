@@ -1,0 +1,44 @@
+{
+  "name": "Twitch +",
+  "description": "Extension that will improve your next visits to Twitch",
+  "version": "0.0.1",
+  "author": "Kaaris_Moi_Le_Crane",
+  "manifest_version": 3,
+  "permissions": ["storage", "tabs", "notifications", "activeTab", "declarativeNetRequest"],
+  "host_permissions": ["*://*.twitch.tv/*", "*://twitch.tv/*"],
+
+  "icons": {
+    "16": "/assets/images/icons/icon_16.png",
+    "24": "/assets/images/icons/icon_24.png",
+    "32": "/assets/images/icons/icon_32.png",
+    "48": "/assets/images/icons/icon_48.png",
+    "128": "/assets/images/icons/icon_128.png"
+  },
+
+  "background": {
+    "service_worker": "/background.js"
+  },
+
+  "action": {
+    "default_popup": "/popup/popup.html",
+    "default_icon": {
+      "16": "/assets/images/icons/icon_16.png",
+      "24": "/assets/images/icons/icon_24.png",
+      "32": "/assets/images/icons/icon_32.png",
+      "48": "/assets/images/icons/icon_48.png",
+      "128": "/assets/images/icons/icon_128.png"
+    }
+  },
+
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "/main.js",
+        "/hls.js",
+        "/plyr.js"
+      ],
+      "matches": ["*://*.twitch.tv/*", "*://twitch.tv/*"]
+    }
+  ]
+}
