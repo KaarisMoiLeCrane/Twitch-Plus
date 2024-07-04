@@ -359,3 +359,9 @@ new MutationObserver(() => {
     main(false);
   }
 }).observe(document, {subtree: true, childList: true});
+
+
+chrome.runtime.onMessage.addListener(function(data, sender, sendResponse){
+  if (data.action == "reload") location.href = location.href
+  return true
+});

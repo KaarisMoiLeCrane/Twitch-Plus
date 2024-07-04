@@ -32,6 +32,10 @@ function enableBlocking() {
       enable = true;
     }
   );
+
+  chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {action: 'reload'});
+  });
 }
 
 function disableBlocking() {
@@ -45,6 +49,10 @@ function disableBlocking() {
       enable = false;
     }
   );
+
+  chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {action: 'reload'});
+  });
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
