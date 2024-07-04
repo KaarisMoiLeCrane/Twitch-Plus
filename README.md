@@ -33,7 +33,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/KaarisMoiLeCrane/Twitch-Plus">
-    <img src="/assets/images/icons/icon_128.png" alt="Logo" width="80" height="80">
+    <img src="/assets/images/icons/icon_128.png" alt="Logo" width="128" height="128">
   </a>
 
 <h3 align="center">Twitch Plus</h3>
